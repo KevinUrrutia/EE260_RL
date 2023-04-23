@@ -1,4 +1,14 @@
 import numpy as np
+import random as rnd
+
+def selectAction(Q, s, epsilon):
+    p_a = rnd.random();
+    if(p_a < epsilon):
+        A = rnd.randint(0, 1)
+    else:
+        A = np.argmax(Q[s])
+
+    return A
 
 r = np.array([[0, 0.2],
              [0, 0.2],
@@ -6,28 +16,32 @@ r = np.array([[0, 0.2],
              [0, 0.2],
              [1, 0.2]])
 
-q = np.zeros((5, 2))
+p_s_a0 = np.array([[0, 0.8, 0.2, 0, 0],
+                   [0, 0, 0.8, 0.2, 0],
+                   [0, 0, 0.2, 0.8, 0],
+                   [0, 0, 0,   0,   1],
+                   [0, 0, 0,   0,   1]])
 
-pi = np.zeros((5, 2))
+p_s_a1 = np.array([[0.9, 0.1, 0, 0, 0],
+                   [0.9, 0.1, 0, 0, 0],
+                   [0.9, 0, 0.1, 0, 0],
+                   [0.9, 0, 0.1, 0, 0],
+                   [0.9, 0, 0.1, 0, 0]])
+
+Q = np.zeros((5, 2))
+V = np.zeros((1, 5))
 
 gamma = 0.95
-epsilon = 0.2
+theta = 1.2
+delta = 0
+epsilon = 0.1
 
 returns = []
 
 while(True):
-    for s in range(np.size(pi, 0)):
-        G_a0 = (r[s][0]) / (1 - gamma)
-        G_a1 = (r[s][1]) / (1 - gamma)
-
-        q[s][0] = G_a0
-        q[s][1] = G_a1
-
-        A_star = np.argmax(q[s])
-
-        for ii in range(np.size(pi, 1)):
-            if(ii == A_star):
-                pi[s][ii] = epsilon / 2
-            else:
-                pi[s][ii] = 1 - epsilon + (epsilon / 2)
-print(q)
+    delta = 0
+    for s in range(np.size(V, 1)):
+        A_star = selectAction(Q, s, epsilon)
+        print(A_star)
+        break
+    break
