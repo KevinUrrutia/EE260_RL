@@ -43,7 +43,7 @@ while(True):
         delta = max(delta, abs(v - V[0][s]))
     if(delta < theta):
         break
-        
+
 print(V)
 
 q = np.zeros((5,2))
