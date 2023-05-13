@@ -18,7 +18,7 @@ config = {
     'dim_action': 2,  # Q network output
     'dims_hidden_neurons': (64, 64),  # Q network hidden
     'lr': 0.0005,  # learning rate
-    'C': 60,  # copy steps
+    'C': 60,  # copy step
     'discount': 0.99,  # discount factor
     'batch_size': 64,
     'replay_buffer_size': 100000,
